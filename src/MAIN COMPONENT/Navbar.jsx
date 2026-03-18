@@ -16,6 +16,7 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
+    { href: "#hero", label: "Home" },
     { href: "#about", label: "About" },
     { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
@@ -62,7 +63,7 @@ export function Navbar() {
               href="#contact"
               className="px-6 py-2 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-lg text-white hover:shadow-lg hover:shadow-[#6366F1]/50 transition-all duration-300"
             >
-              Get in Touch
+              My Resume
             </a>
           </div>
 

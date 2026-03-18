@@ -135,12 +135,7 @@ export function Hero() {
             <div className="space-y-4">
 
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#1E293B] border border-[#6366F1]/30 rounded-full badge">
-                <span className="w-2 h-2 bg-[#14B8A6] rounded-full animate-pulse"></span>
-                <span className="text-sm text-[#94A3B8]">
-                  Available for opportunities
-                </span>
-              </div>
+              
 
               {/* Heading */}
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight heading">
