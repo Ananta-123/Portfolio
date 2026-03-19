@@ -194,7 +194,14 @@ export function Hero() {
           <div className="space-y-8 hero-content">
             <div className="space-y-4">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight heading">
-                <span className="text-[#F8FAFC] split-hover">
+                <span className="text-4xl bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#14B8A6] bg-clip-text text-transparent">
+                  Hi,&nbsp;
+                </span>  
+                <span className="text-[#F8FAFC] split-hover text-4xl ">
+                  I'm
+                </span>
+                <br />
+                <span className="text-[#F8FAFC] split-hover ">
                   Ananta Prasad
                 </span>
                 <br />
@@ -205,6 +212,7 @@ export function Hero() {
 
               <p className="text-2xl sm:text-3xl text-[#94A3B8] font-semibold subheading split-gradient">
                 MERN Stack Developer
+                
               </p>
 
               <p className="text-lg text-[#94A3B8] leading-relaxed max-w-2xl description split-hover">
