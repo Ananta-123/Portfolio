@@ -37,6 +37,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
+          
           <motion.a
             href="#hero"
             className="text-xl font-bold bg-gradient-to-r from-[#6366F1] to-[#14B8A6] bg-clip-text text-transparent"
@@ -60,7 +61,7 @@ export function Navbar() {
             ))}
 
             <a
-              href="#contact"
+              href="public/AnantaResume.pdf"
               className="px-6 py-2 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-lg text-white hover:shadow-lg hover:shadow-[#6366F1]/50 transition-all duration-300"
             >
               My Resume

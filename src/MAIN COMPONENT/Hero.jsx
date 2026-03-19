@@ -48,7 +48,7 @@ export function Hero() {
         const leave = () => {
           gsap.to(char, {
             backgroundImage: "none",
-            color: "#F8FAFC", // keep dark theme text
+            color: "#F8FAFC",
             duration: 0.3
           });
         };
@@ -56,10 +56,10 @@ export function Hero() {
         char.addEventListener("mouseenter", enter);
         char.addEventListener("mouseleave", leave);
 
-        handlers.push({ char, enter, leave });
+        handlers.push({ el: char, enter, leave });
       });
 
-      // ✅ Entry animation for split text
+      // ✅ Entry animation
       gsap.from(splitHover.chars, {
         opacity: 0,
         y: 20,
@@ -68,7 +68,7 @@ export function Hero() {
         ease: "power2.out"
       });
 
-      // ✅ Main timeline (your original)
+      // ✅ Timeline animation
       const tl = gsap.timeline();
 
       tl.from(".hero-content", {
@@ -76,11 +76,6 @@ export function Hero() {
         x: -50,
         duration: 0.8
       })
-        .from(".badge", {
-          opacity: 0,
-          y: 20,
-          duration: 0.4
-        }, "-=0.5")
         .from(".heading", { opacity: 0, y: 20, duration: 0.4 }, "-=0.3")
         .from(".subheading", { opacity: 0, y: 20, duration: 0.4 }, "-=0.3")
         .from(".description", { opacity: 0, y: 20, duration: 0.4 }, "-=0.3")
@@ -97,7 +92,7 @@ export function Hero() {
           "-=0.6"
         );
 
-      // ✅ Optional: floating image (premium feel)
+      // ✅ Floating animation
       gsap.to(".hero-image", {
         y: -10,
         repeat: -1,
@@ -106,11 +101,76 @@ export function Hero() {
         ease: "power1.inOut"
       });
 
+      // ===============================
+      // ✅ IMAGE HOVER EFFECT (3D TILT)
+      // ===============================
+      const image = containerRef.current.querySelector(".hero-image");
+
+      const enterHandler = () => {
+        gsap.to(image, {
+          scale: 1.05,
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      };
+
+      const moveHandler = (e) => {
+        const bounds = image.getBoundingClientRect();
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
+
+        const centerX = bounds.width / 2;
+        const centerY = bounds.height / 2;
+
+        const rotateX = -(y - centerY) / 20;
+        const rotateY = (x - centerX) / 20;
+
+        gsap.to(image, {
+          rotationX: rotateX,
+          rotationY: rotateY,
+          transformPerspective: 500,
+          transformOrigin: "center",
+          duration: 0.2,
+          ease: "power1.out"
+        });
+
+        // Optional glow
+        gsap.to(image, {
+          boxShadow: `
+            ${(x - centerX) / 5}px ${(y - centerY) / 5}px 40px rgba(99,102,241,0.3)
+          `,
+          duration: 0.2
+        });
+      };
+
+      const leaveHandler = () => {
+        gsap.to(image, {
+          scale: 1,
+          rotationX: 0,
+          rotationY: 0,
+          boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+          duration: 0.5,
+          ease: "power3.out"
+        });
+      };
+
+      image.addEventListener("mouseenter", enterHandler);
+      image.addEventListener("mousemove", moveHandler);
+      image.addEventListener("mouseleave", leaveHandler);
+
+      handlers.push({
+        el: image,
+        enter: enterHandler,
+        move: moveHandler,
+        leave: leaveHandler
+      });
+
       // ✅ Cleanup
       return () => {
-        handlers.forEach(({ char, enter, leave }) => {
-          char.removeEventListener("mouseenter", enter);
-          char.removeEventListener("mouseleave", leave);
+        handlers.forEach(({ el, enter, move, leave }) => {
+          if (enter) el.removeEventListener("mouseenter", enter);
+          if (move) el.removeEventListener("mousemove", move);
+          if (leave) el.removeEventListener("mouseleave", leave);
         });
 
         splitSubheading.revert();
@@ -133,11 +193,6 @@ export function Hero() {
           {/* Content */}
           <div className="space-y-8 hero-content">
             <div className="space-y-4">
-
-              {/* Badge */}
-              
-
-              {/* Heading */}
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight heading">
                 <span className="text-[#F8FAFC] split-hover">
                   Ananta Prasad
@@ -148,33 +203,23 @@ export function Hero() {
                 </span>
               </h1>
 
-              {/* Subheading */}
               <p className="text-2xl sm:text-3xl text-[#94A3B8] font-semibold subheading split-gradient">
                 MERN Stack Developer
               </p>
 
-              {/* Description */}
               <p className="text-lg text-[#94A3B8] leading-relaxed max-w-2xl description split-hover">
                 Full-stack developer specializing in the MERN stack...
               </p>
 
-              {/* Location */}
               <div className="flex items-center gap-2 text-[#94A3B8] location split-hover">
                 <MapPin size={18} className="text-[#14B8A6]" />
                 <span>Cuttack, Odisha, India</span>
               </div>
-
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-4 buttons">
-              {/* Add your buttons here */}
-            </div>
+            <div className="flex flex-wrap gap-4 buttons"></div>
 
-            {/* Socials */}
-            <div className="flex items-center gap-4 pt-4 socials">
-              {/* Add socials */}
-            </div>
+            <div className="flex items-center gap-4 pt-4 socials"></div>
           </div>
 
           {/* Image */}
