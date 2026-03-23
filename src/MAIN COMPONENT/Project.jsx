@@ -173,7 +173,7 @@ export function Project() {
                 <div className="flex flex-wrap gap-4">
                   
                   <a
-                    href={project.demoUrl}
+                    href="https://taskji.com/"
                     className="group px-6 py-3 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-lg text-white font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-[#6366F1]/50 transition-all duration-300"
                   >
                     <ExternalLink size={18} />
@@ -185,7 +185,7 @@ export function Project() {
                   </a>
 
                   <a
-                    href={project.githubUrl}
+                    href="https://github.com/taskjionline/taskji-dev-portfolio"
                     className="px-6 py-3 bg-[#1E293B] border border-white/10 rounded-lg text-[#F8FAFC] font-semibold flex items-center gap-2 hover:border-[#6366F1]/50 transition-all duration-300"
                   >
                     <Github size={18} />
