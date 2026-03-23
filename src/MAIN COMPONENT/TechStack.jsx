@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 import { Code2, Database, Server, Wrench } from "lucide-react";
+import "@fontsource/sora";
+import "@fontsource/inter";
 
 export function TechStack() {
   const containerRef = useRef(null);
@@ -163,11 +165,11 @@ export function TechStack() {
 
           {/* Content */}
           <div className="text-center md:text-left">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#14B8A6] bg-clip-text text-transparent">
+            <h2 className="font-sora text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#14B8A6] bg-clip-text text-transparent">
               About Me
             </h2>
 
-            <p className="text-[#94A3B8] mb-4 leading-relaxed">
+            <p className="font-inter text-[#94A3B8] mb-4 leading-relaxed">
               I'm a passionate full-stack developer focused on building modern,
               scalable, and user-centric web applications. I specialize in crafting
               clean UI with{" "}
@@ -178,7 +180,7 @@ export function TechStack() {
               <span className="text-[#14B8A6]">Express.js</span>.
             </p>
 
-            <p className="text-[#94A3B8] leading-relaxed">
+            <p className="font-inter not-odd:text-[#94A3B8] leading-relaxed">
               With experience in MongoDB, MySQL, Git, REST APIs, RBAC, and Analytics,
               I focus on building performant and scalable applications with clean architecture.
             </p>
@@ -194,13 +196,13 @@ export function TechStack() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+          <h2 className="font-sora text-4xl sm:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#14B8A6] bg-clip-text text-transparent">
               Tech Stack
             </span>
           </h2>
 
-          <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
+          <p className="font-inter text-lg text-[#94A3B8] max-w-2xl mx-auto">
             Technologies I use to build modern, scalable applications
           </p>
         </motion.div>
@@ -230,7 +232,7 @@ export function TechStack() {
                   <category.icon size={24} style={{ color: category.color }} />
                 </div>
 
-                <h3 className="text-xl font-semibold text-[#F8FAFC] mb-4">
+                <h3 className="font-sora text-xl font-semibold text-[#F8FAFC] mb-4">
                   {category.category}
                 </h3>
 

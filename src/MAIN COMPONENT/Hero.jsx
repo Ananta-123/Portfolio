@@ -229,7 +229,7 @@ export function Hero() {
           <div className="space-y-8 hero-content order-2 lg:order-1">
 
             <div className="space-y-4">
-              <h1 className="text-5xl sm:text-6xl lg:text-6xl font-heading font-bold tracking-tight leading-tight heading">
+              <h1 className="font-sora text-5xl sm:text-6xl lg:text-6xl font-heading font-bold tracking-tight leading-tight heading">
                 <span className="text-4xl bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#14B8A6] bg-clip-text text-transparent">
                   Hi,&nbsp;
                 </span>
@@ -239,15 +239,15 @@ export function Hero() {
                 <br />
                 <span
                   ref={nameRef}
-                  className="text-[#F8FAFC] text-2xl sm:text-5xl lg:text-5xl font-heading tracking-tight"
+                  className="font-sora text-[#F8FAFC] text-2xl sm:text-4xl lg:text-4xl font-heading tracking-tight"
                 ></span>
               </h1>
 
-              <p className="text-3xl sm:text-xl text-[#94A3B8] font-heading font-semibold tracking-wide subheading split-gradient">
+              <p className=" font-inter text-2xl sm:text-4xl text-[#94A3B8] font-heading font-semibold tracking-wide subheading split-gradient">
                 MERN Stack Developer
               </p>
 
-              <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed max-w-2xl description split-hover font-body">
+              <p className="font-inter text-base sm:text-lg text-[#94A3B8] leading-relaxed max-w-2xl description split-hover ">
                 I build scalable and high-performance web applications using the MERN stack.
               </p>
 
