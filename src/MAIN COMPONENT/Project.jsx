@@ -19,8 +19,8 @@ export function Project() {
         "Designed scalable modular components",
       ],
       color: "#6366F1",
-      demoUrl: "#",
-      githubUrl: "#",
+      demoUrl: "https://taskji.com/",
+      githubUrl: "https://github.com/taskjionline/taskji-dev-portfolio",
     },
     {
       title: "Blog Platform",
@@ -41,7 +41,7 @@ export function Project() {
       ],
       color: "#14B8A6",
       demoUrl: "#",
-      githubUrl: "#",
+      githubUrl: "https://github.com/Ananta-123/Blog-MoovOn.git",
     },
   ];
 
@@ -173,7 +173,7 @@ export function Project() {
                 <div className="flex flex-wrap gap-4">
                   
                   <a
-                    href="https://taskji.com/"
+                    href={project.demoUrl}
                     className="group px-6 py-3 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-lg text-white font-semibold flex items-center gap-2 hover:shadow-lg hover:shadow-[#6366F1]/50 transition-all duration-300"
                   >
                     <ExternalLink size={18} />
@@ -185,7 +185,7 @@ export function Project() {
                   </a>
 
                   <a
-                    href="https://github.com/taskjionline/taskji-dev-portfolio"
+                    href={project.githubUrl}
                     className="px-6 py-3 bg-[#1E293B] border border-white/10 rounded-lg text-[#F8FAFC] font-semibold flex items-center gap-2 hover:border-[#6366F1]/50 transition-all duration-300"
                   >
                     <Github size={18} />
