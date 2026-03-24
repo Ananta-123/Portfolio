@@ -8,13 +8,15 @@ import "@fontsource/inter";
 export function TechStack() {
   const containerRef = useRef(null);
   const imageRef = useRef(null);
+  const cardsRef = useRef([]);
+  const svgBgRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current || !imageRef.current) return;
 
     let ctx = gsap.context(() => {
       // ===============================
-      // ✅ SAFE ENTRANCE ANIMATION
+      // ✅ ENTRANCE ANIMATION
       // ===============================
       gsap.fromTo(
         containerRef.current,
@@ -28,7 +30,7 @@ export function TechStack() {
       );
 
       // ===============================
-      // ✅ IMAGE HOVER TILT EFFECT
+      // ✅ IMAGE HOVER TILT
       // ===============================
       const el = imageRef.current;
 
@@ -45,7 +47,6 @@ export function TechStack() {
           rotateX,
           scale: 1.08,
           transformPerspective: 600,
-          transformOrigin: "center",
           duration: 0.3,
           ease: "power2.out"
         });
@@ -63,6 +64,56 @@ export function TechStack() {
 
       el.addEventListener("mousemove", handleMove);
       el.addEventListener("mouseleave", handleLeave);
+
+      // ===============================
+      // ✅ SVG BACKGROUND ANIMATION
+      // ===============================
+      gsap.to(svgBgRef.current, {
+        rotate: 360,
+        duration: 30,
+        repeat: -1,
+        ease: "none"
+      });
+
+      // ===============================
+      // ✅ CARD ENTRANCE (STAGGER)
+      // ===============================
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        }
+      );
+
+      // ===============================
+      // ✅ CARD HOVER GSAP EFFECT
+      // ===============================
+      cardsRef.current.forEach((card) => {
+        if (!card) return;
+
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            y: -10,
+            scale: 1.03,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            y: 0,
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
 
       // ===============================
       // ✅ CLEANUP
@@ -112,7 +163,7 @@ export function TechStack() {
   return (
     <section id="about" className="relative py-20 overflow-hidden">
 
-      {/* ✅ FIXED OVERLAY */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#6366F1]/5 to-transparent pointer-events-none"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,7 +179,24 @@ export function TechStack() {
               ref={imageRef}
               className="relative w-[320px] h-[320px] hero-tilt"
             >
-              {/* SVG Ring */}
+              {/* ✅ NEW GSAP SVG BG */}
+              <svg
+                ref={svgBgRef}
+                className="absolute inset-0"
+                viewBox="0 0 200 200"
+              >
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="90"
+                  stroke="#6366F1"
+                  strokeWidth="1"
+                  fill="none"
+                  strokeDasharray="4 6"
+                />
+              </svg>
+
+              {/* Existing Ring */}
               <svg
                 className="absolute inset-0 animate-spin-slow"
                 viewBox="0 0 200 200"
@@ -180,13 +248,13 @@ export function TechStack() {
               <span className="text-[#14B8A6]">Express.js</span>.
             </p>
 
-            <p className="font-inter not-odd:text-[#94A3B8] leading-relaxed">
+            {/* ✅ ITALIC FIX */}
+            <p className="font-inter italic text-[#94A3B8] leading-relaxed">
               With experience in MongoDB, MySQL, Git, REST APIs, RBAC, and Analytics,
               I focus on building performant and scalable applications with clean architecture.
             </p>
           </div>
         </div>
-        {/* ================= END ABOUT ================= */}
 
         {/* Section Title */}
         <motion.div
@@ -210,13 +278,9 @@ export function TechStack() {
         {/* Tech Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {techCategories.map((category, index) => (
-            <motion.div
+            <div
               key={category.category}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              ref={(el) => (cardsRef.current[index] = el)}
               className="group relative bg-[#1E293B] border border-white/10 rounded-xl p-6 hover:border-[#6366F1]/50 transition-all duration-300"
             >
               <div
@@ -251,7 +315,7 @@ export function TechStack() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
