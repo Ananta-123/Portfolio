@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Linkedin, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -9,9 +10,36 @@ export function Contact() {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setLoading(true);
+
+    emailjs
+      .send(
+        "service_bs451vv",
+        "template_gyeaqk8",
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          from_name: formData.name,
+          reply_to: formData.email,
+        },
+        "zOZG2fTo1uMerD-eN"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          setFormData({ name: "", email: "", message: "" });
+          setLoading(false);
+        },
+        (error) => {
+          console.error(error);
+          alert("Failed to send message.");
+          setLoading(false);
+        }
+      );
   };
 
   const handleChange = (e) => {
@@ -54,7 +82,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative py-20 overflow-hidden">
-      
+
       {/* Background Blur */}
       <div className="absolute inset-0">
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#6366F1]/10 rounded-full blur-3xl"></div>
@@ -212,12 +240,13 @@ export function Contact() {
 
               <motion.button
                 type="submit"
+                disabled={loading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-4 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-lg text-white font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#6366F1]/50 transition-all duration-300"
+                className="w-full px-8 py-4 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-lg text-white font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#6366F1]/50 transition-all duration-300 disabled:opacity-50"
               >
                 <Send size={20} />
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </motion.button>
 
             </form>
